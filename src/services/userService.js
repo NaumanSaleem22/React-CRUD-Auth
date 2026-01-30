@@ -9,7 +9,6 @@ export const getUsers = async () =>{
     return axios.get(API_URL);
 }
 
-
 // Get user by id
 
 export const getUserById = async (id) =>{

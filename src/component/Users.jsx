@@ -1,15 +1,18 @@
 import React, { use, useEffect, useState } from 'react'
 import { getUserById, getUsers } from '../services/userService';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Users = () => {
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const location = useLocation();
 
     useEffect(() => {
-        fetchUser();
+        // if (location.state && location.state.refresh) {
+            fetchUser();
+        // }
     }, [])
 
     const fetchUser = async () => {
@@ -27,7 +30,7 @@ const Users = () => {
         }
     }
 
-    
+
 
     return (
         <div>
@@ -46,16 +49,16 @@ const Users = () => {
                     users.map((user) => {
                         return (
                             <li key={user.id}>
-                               {user.id} ---- {user.name} - {user.email}
+                                {user.id} ---- {user.name} - {user.email}
                                 <br />
-                                 <Link to={`/user/${user.id}`}>View Details</Link>
+                                <Link to={`/user/${user.id}`}>View Details</Link>
                             </li>
                         )
                     })
                 }
             </ul>
 
-            
+
 
 
         </div>

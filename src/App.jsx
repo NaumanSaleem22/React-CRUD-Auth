@@ -13,12 +13,12 @@ function App() {
     <>
       <BrowserRouter>
         <nav>
-          <Link to="/">Users</Link>
+          <Link to="/Users">Users</Link>
           <Link to="/add-user">Add User</Link>
           <hr />
         </nav>
         <Routes>
-          <Route path='/' element={<Users />} />
+          <Route path='/users' element={<Users />} />
           <Route path='/add-user' element={<AddUser />} />
           <Route path='/user/:id' element={<UserDetails />} />
         </Routes>
