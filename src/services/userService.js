@@ -20,3 +20,9 @@ export const getUserById = async (id) =>{
 export const createUser = async (userData)=>{
     return axios.post(API_URL, userData);
 }
+
+// Delete
+
+export const deleteUser = async (id) =>{
+    return axios.delete(`${API_URL}/${id}`)
+}

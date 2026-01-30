@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from 'react'
-import { getUserById, getUsers } from '../services/userService';
+import { getUserById, getUsers,deleteUser } from '../services/userService';
 import { Link, useLocation } from 'react-router-dom';
 
 const Users = () => {
@@ -11,7 +11,7 @@ const Users = () => {
 
     useEffect(() => {
         // if (location.state && location.state.refresh) {
-            fetchUser();
+        fetchUser();
         // }
     }, [])
 
@@ -30,6 +30,19 @@ const Users = () => {
         }
     }
 
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+        if (!confirmDelete) return;
+        try {
+            await deleteUser(id);
+            setUsers(prev => prev.filter(user => user.id !== id));
+        }
+        catch (err) {
+            setError("Failed to delete user");
+           console.log(err.response?.data || err.message);
+        }
+
+    }
 
 
     return (
@@ -44,19 +57,25 @@ const Users = () => {
             {/* 🟡 Loader */}
             {loading && <p>Loading...</p>}
 
-            <ul>
+            <table border="1" cellPadding="10" cellSpacing="0">
                 {
                     users.map((user) => {
                         return (
-                            <li key={user.id}>
-                                {user.id} ---- {user.name} - {user.email}
-                                <br />
-                                <Link to={`/user/${user.id}`}>View Details</Link>
-                            </li>
+                            <tr key={user.id}>
+                                <td>{user.id}</td>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>
+                                    <Link to={`/user/${user.id}`}>View Details</Link>
+                                </td>
+                                <td>
+                                    <button onClick={() => handleDelete(user.id)}>Delete</button>
+                                </td>
+                            </tr>
                         )
                     })
                 }
-            </ul>
+            </table>
 
 
 
