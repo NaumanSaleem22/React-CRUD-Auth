@@ -35,7 +35,7 @@ const UserDetails = () => {
                 </>
             )}
 
-            <Link to="/">⬅ Back</Link></div>
+            <Link to="/users">⬅ Back</Link></div>
     )
 }
 

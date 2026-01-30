@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from 'react'
-import { getUserById, getUsers,deleteUser } from '../services/userService';
+import { getUserById, getUsers, deleteUser } from '../services/userService';
 import { Link, useLocation } from 'react-router-dom';
 
 const Users = () => {
@@ -39,7 +39,7 @@ const Users = () => {
         }
         catch (err) {
             setError("Failed to delete user");
-           console.log(err.response?.data || err.message);
+            console.log(err.response?.data || err.message);
         }
 
     }
@@ -58,6 +58,7 @@ const Users = () => {
             {loading && <p>Loading...</p>}
 
             <table border="1" cellPadding="10" cellSpacing="0">
+                <tbody>
                 {
                     users.map((user) => {
                         return (
@@ -71,10 +72,14 @@ const Users = () => {
                                 <td>
                                     <button onClick={() => handleDelete(user.id)}>Delete</button>
                                 </td>
+
+                                <td>
+                                    <Link to={`/user/${user.id}/edit`}>Edit</Link> {/* ✅ Edit */}
+                                </td>
                             </tr>
                         )
                     })
-                }
+                }</tbody>
             </table>
 
 
