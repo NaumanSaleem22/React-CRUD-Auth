@@ -35,7 +35,7 @@ const Users = () => {
         if (!confirmDelete) return;
         try {
             await deleteUser(id);
-            setUsers(prev => prev.filter(user => user.id !== id));
+            setUsers(res => res.filter(user => user.id !== id));
         }
         catch (err) {
             setError("Failed to delete user");
