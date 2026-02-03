@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react'
+import React, { use, useEffect, useMemo, useState } from 'react'
 import { getUserById, getUsers, deleteUser } from '../services/userService';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ const Users = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const location = useLocation();
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         // if (location.state && location.state.refresh) {
@@ -44,12 +45,19 @@ const Users = () => {
 
     }
 
+    const filteredUsers = useMemo(() => {
+        console.log("Filtering users...");
+        return users.filter(user => user.name.toLowerCase().includes(search.toLowerCase()));
+    }, [users, search]); // If users or search changes, recompute
 
     return (
         <div>
             <h2>
                 Users List
             </h2>
+
+            <input type='text' placeholder='Search users...' value={search} onChange={(e) => setSearch(e.target.value)} />
+            <br/><br/>
 
             {/* 🔴 Error */}
             {error && <p style={{ color: "red" }}>{error}</p>}
@@ -59,27 +67,27 @@ const Users = () => {
 
             <table border="1" cellPadding="10" cellSpacing="0">
                 <tbody>
-                {
-                    users.map((user) => {
-                        return (
-                            <tr key={user.id}>
-                                <td>{user.id}</td>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td>
-                                    <Link to={`/user/${user.id}`}>View Details</Link>
-                                </td>
-                                <td>
-                                    <button onClick={() => handleDelete(user.id)}>Delete</button>
-                                </td>
+                    {
+                        filteredUsers.map((user) => {
+                            return (
+                                <tr key={user.id}>
+                                    <td>{user.id}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
+                                    <td>
+                                        <Link to={`/user/${user.id}`}>View Details</Link>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleDelete(user.id)}>Delete</button>
+                                    </td>
 
-                                <td>
-                                    <Link to={`/user/${user.id}/edit`}>Edit</Link> {/* ✅ Edit */}
-                                </td>
-                            </tr>
-                        )
-                    })
-                }</tbody>
+                                    <td>
+                                        <Link to={`/user/${user.id}/edit`}>Edit</Link> {/* ✅ Edit */}
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }</tbody>
             </table>
 
 
