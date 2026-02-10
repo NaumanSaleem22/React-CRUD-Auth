@@ -46,7 +46,6 @@ const Users = () => {
     }
 
     const filteredUsers = useMemo(() => {
-        console.log("Filtering users...");
         return users.filter(user => user.name.toLowerCase().includes(search.toLowerCase()));
     }, [users, search]); // If users or search changes, recompute
 

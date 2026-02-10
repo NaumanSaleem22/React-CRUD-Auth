@@ -4,23 +4,24 @@ import AddUser from './component/AddUser'
 import { Route, Routes, Link, BrowserRouter } from 'react-router-dom'
 import UserDetails from './component/UserDetails'
 import EditUser from './component/EditUser'
+import Login from './component/Login'
+import ProtectedRoute from './component/ProtectedRoute'
+import Nav from './component/Nav'
+
 function App() {
-  
+
+
 
   return (
     <>
       <BrowserRouter>
-        <nav>
-          <Link to="/Users">Users</Link>
-          <Link to="/add-user">Add User</Link>
-          <Link to="/edit-user">Edit User</Link>
-          <hr />
-        </nav>
+        <Nav/>
         <Routes>
-          <Route path='/users' element={<Users />} />
-          <Route path='/add-user' element={<AddUser />} />
-          <Route path='/user/:id' element={<UserDetails />} />
-          <Route path='/user/:id/edit' element={<EditUser />} />
+          <Route path='/users' element={<ProtectedRoute><Users /></ProtectedRoute>} />
+          <Route path='/add-user' element={<ProtectedRoute><AddUser /></ProtectedRoute>} />
+          <Route path='/user/:id' element={<ProtectedRoute><UserDetails /></ProtectedRoute>} />
+          <Route path='/user/:id/edit' element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>
