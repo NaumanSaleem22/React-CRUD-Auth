@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import MyProfile from './MyProfile';
-
+import Button from 'react-bootstrap/Button';
 
 const NavbarS = () => {
 
@@ -36,8 +36,7 @@ const NavbarS = () => {
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to="/Users">Users</Nav.Link>
                         <Nav.Link as={Link} to="/add-user">Add User</Nav.Link>
-                        {!token && <Nav.Link as={Link} to="/login">Login</Nav.Link>}
-                        {token && <Nav.Link onClick={handleLogout}>Logout</Nav.Link>}
+
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
@@ -50,6 +49,9 @@ const NavbarS = () => {
                             </NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link as={Link} to="/my-profile">My Profile</Nav.Link>
+
+                        {token && <Button variant="danger" onClick={handleLogout}>Logout</Button>}
+                        {!token && <Button variant="success" as={Link} to="/login">Login</Button>}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

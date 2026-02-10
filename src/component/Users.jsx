@@ -1,7 +1,7 @@
 import React, { use, useEffect, useMemo, useState } from 'react'
 import { getUserById, getUsers, deleteUser } from '../services/userService';
 import { Link, useLocation } from 'react-router-dom';
-
+import Button from 'react-bootstrap/Button';
 const Users = () => {
 
     const [users, setUsers] = useState([]);
@@ -77,7 +77,7 @@ const Users = () => {
                                         <Link to={`/user/${user.id}`}>View Details</Link>
                                     </td>
                                     <td>
-                                        <button onClick={() => handleDelete(user.id)}>Delete</button>
+                                        <Button variant="danger" onClick={() => handleDelete(user.id)}>Delete</Button>
                                     </td>
 
                                     <td>
