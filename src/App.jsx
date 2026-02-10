@@ -8,9 +8,16 @@ import Login from './component/Login'
 import ProtectedRoute from './component/ProtectedRoute'
 import NavbarS from './component/Nav'
 import MyProfile from './component/MyProfile'
+import { useEffect } from 'react'
+import { useContext } from 'react';
+import { ThemeContext } from './context/ThemeContext';
 function App() {
 
+  const { theme } = useContext(ThemeContext);
 
+  useEffect(() => {
+    document.body.className = theme; // Apply theme class to body
+  }, [theme]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { getToken, logout } from '../utils/auth'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
@@ -8,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import MyProfile from './MyProfile';
 import Button from 'react-bootstrap/Button';
+import { ThemeContext } from '../context/ThemeContext';
 
 const NavbarS = () => {
 
@@ -18,15 +19,10 @@ const NavbarS = () => {
         logout();
         navigate("/login");
     }
+
+    const { theme, toggleTheme } = useContext(ThemeContext);
+
     return (
-        // <nav>
-        //     <Link to="/Users">Users</Link>
-        //     <Link to="/add-user">Add User</Link>
-        //    {!token && <Link to="/login">Login</Link>}
-        //     {token && <button onClick={handleLogout}>Logout</button>}
-        //     <hr />
-        //     <hr />
-        // </nav>
 
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
@@ -52,6 +48,9 @@ const NavbarS = () => {
 
                         {token && <Button variant="danger" onClick={handleLogout}>Logout</Button>}
                         {!token && <Button variant="success" as={Link} to="/login">Login</Button>}
+                        <Button onClick={toggleTheme} style={{ marginLeft: "10px" }}>
+                            Toggle {theme === "light" ? "Dark" : "Light"} Theme
+                        </Button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
