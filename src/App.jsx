@@ -6,8 +6,8 @@ import UserDetails from './component/UserDetails'
 import EditUser from './component/EditUser'
 import Login from './component/Login'
 import ProtectedRoute from './component/ProtectedRoute'
-import Nav from './component/Nav'
-
+import NavbarS from './component/Nav'
+import MyProfile from './component/MyProfile'
 function App() {
 
 
@@ -15,12 +15,13 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Nav/>
+        <NavbarS/>
         <Routes>
           <Route path='/users' element={<ProtectedRoute><Users /></ProtectedRoute>} />
           <Route path='/add-user' element={<ProtectedRoute><AddUser /></ProtectedRoute>} />
           <Route path='/user/:id' element={<ProtectedRoute><UserDetails /></ProtectedRoute>} />
           <Route path='/user/:id/edit' element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+          <Route path='/my-profile' element={<ProtectedRoute><MyProfile /></ProtectedRoute>} />
           <Route path='/login' element={<Login />} />
         </Routes>
       </BrowserRouter>
